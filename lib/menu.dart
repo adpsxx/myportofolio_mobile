@@ -18,6 +18,9 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Lihat Proyek", Icons.folder),
     ItemHomepage("Tambah Proyek", Icons.add_circle),
     ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("Lihat Experience", Icons.work_outline),
+    ItemHomepage("Tambah Experience", Icons.add_circle),
+    ItemHomepage("Portofolio Web", Icons.link),
   ];
 
   @override
