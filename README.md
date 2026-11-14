@@ -28,7 +28,7 @@ myportofolio_mobile/
 1. Unduh `Flutter SDK` sesuai sistem operasi melalui halaman resmi: [Install Flutter](https://docs.flutter.dev/get-started/install)
 2. Ekstrak arsip Flutter SDK ke direktori yang diinginkan
 3. Tambahkan direktori `flutter/bin` ke environment variable **`PATH`** agar perintah `flutter` dan `dart` dapat diakses dari terminal.
-5. Verifikasi instalasi dengan menjalankan perintah berikut di terminal:
+4. Verifikasi instalasi dengan menjalankan perintah berikut di terminal:
    ```bash
    flutter doctor
    ```
@@ -36,24 +36,24 @@ myportofolio_mobile/
    ```bash
    flutter doctor --android-licenses
    ```
-6. Clone repositori lalu masuk ke direktori proyek:
+5. Clone repositori lalu masuk ke direktori proyek:
    ```bash
    git clone https://github.com/adpsxx/myportofolio_mobile.git
    cd myportofolio_mobile
    ```
-7. Unduh seluruh dependensi proyek:
+6. Unduh seluruh dependensi proyek:
    ```bash
    flutter pub get
    ```
-8. Pastikan tidak ada error atau peringatan pada kode:
+7. Pastikan tidak ada error atau peringatan pada kode:
    ```bash
    flutter analyze
    ```
-9. Cek perangkat/emulator yang tersedia:
+8. Cek perangkat/emulator yang tersedia:
    ```bash
    flutter devices
    ```
-10. Jalankan aplikasi pada emulator, perangkat fisik, atau browser yang tersedia:
+9. Jalankan aplikasi pada emulator, perangkat fisik, atau browser yang tersedia:
    ```bash
    flutter run
    ```
