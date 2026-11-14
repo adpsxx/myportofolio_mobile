@@ -64,3 +64,52 @@ myportofolio_mobile/
 - Membuat page main menu.
 - Menambahkan ItemCard dan styling untuk masing-masing card tersebut.
 
+## Pertanyaan Reflektif
+### Tugas 7
+#### 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
+Pada Flutter, widget tree adalah sebuah struktur hierarkikal dari widgets yang membangun sebuah interface aplikasi Flutter tersebut. Di dalam Flutter, hampir semua elemen visual disebut sebagai widget. Ketika aplikasi dijalankan, Flutter membaca struktur widget dan merendernya.
+
+Hubungan parent-child mengatur bagaimana layout, ukuran, dan posisi setiap elemen ditampilkan pada layar. Parent widget adalah widget yang membungkus atau memiliki widget lain didalamnya, sedangkan child widget adalah widget yang dibungkus oleh parent widget tersebut.
+
+#### 2. Sebutkan semua widget yang kamu gunakan dalam proyek ini dan jelaskan fungsinya masing-masing!
+- Scaffold: Menyediakan struktur tata letak visual pada page.
+- AppBar: Menampilkan judul pada bagian atas aplikasi.
+- Padding: Memberikan jarak di sekeliling child widget.
+- Column: Menyusun widget secara vertikal.
+- Row: Menyusun widget secara horizontal.
+- SizedBox: Memberikan ruang kosong/pemisah antar widget.
+- Center: Memposisikan child widget di tengah.
+- Text: Menampilkan text yang ingin ditampilkan.
+- GridView: Menyusun card dalam grid.
+- Card: Membuat wadah berbentuk kartu.
+- Container: Wadah untuk mengatur lebar.
+- InkWell: Memberikan interaktifitas saat disentuh.
+- Icon: Menampilkan logo/icon.
+- SnackBar: Menampilkan pesan saat ItemCard disentuh.
+- MyApp: Widget root aplikasi.
+- MyHomepage: Widget main page.
+- InfoCard: Kartu yang menampilkan NPM, Nama, Kelas.
+- ItemCard: Menampilkan masing-masing card untuk tombol menu.
+- MaterialApp: Widget root yang menyediakan konfigurasi aplikasi Material Design
+- Material: Memberikan permukaan Material Design
+
+#### 3. Apa fungsi dari widget MaterialApp? Jelaskan mengapa widget ini umumnya digunakan sebagai root widget pada aplikasi Flutter!
+Widget MaterialApp berfungsi sebagai wrapper utama Flutter yang menggunakan Material Design. Widget tersebut mengelola banyak hal seperti tema, sistem navigasi, dan lain-lain. 
+
+MaterialApp sering diletakkan sebagai root widget dikarenakan hampir seluruh widget pada aplikasi Flutter bergantung pada context yang disediakan oleh widget MateriapApp. Jika ada widget yang dipasang di luar MaterialApp, aplikasi akan mengalami error karena tidak menemukan context yang sesuai.
+
+#### 4. Jelaskan perbedaan antara StatelessWidget dan StatefulWidget! Kapan kita sebaiknya memilih StatelessWidget dan kapan harus menggunakan StatefulWidget?
+StatelessWidget adalah widget yang tidak memiliki state yang akan berubah. Widget ini hanya akan dibangun ulang ketika parameter dari parentnya berubah. StatelessWidget cocok digunakan pada tampilan UI yang bersifat statis.
+
+StatefulWidget adalah widget yang memiliki objek State terpisah untuk menyimpan data dinamis yang dapat berubah selama aplikasi berjalan. StatefulWidget cocok digunakan pada widget yang harus mengubah tampilannya berdasarkan interaksi pengguna atau adanya suatu perubahan data.
+
+#### 5. Apa itu BuildContext dan mengapa penting di Flutter? Bagaimana penggunaannya di dalam metode build?
+BuildContext merepresentasikan lokasi sebuah widget di dalam widget tree. BuildContext penting agar widget dapat menelusuri widget tree untuk mengakses data parent-parent nya tanpa harus meneruskan data secara manual melalui parameter di setiap lapisan widget. 
+
+Contoh penggunaan pada metode buildbuild(BuildContext context), kita dapat mengakses warna tema utama dari MaterialApp:
+Theme.of(context).colorScheme.primary
+
+#### 6. Jelaskan konsep hot reload di Flutter dan apa perbedaannya dengan hot restart! Kapan kita tidak bisa hanya mengandalkan hot reload dan harus melakukan hot restart atau full restart?
+Hot Reload memasukkan perubahan kode Dart yang baru kedalam yang sedang berjalan lalu memanggil ulang metode build(). Hot Reload berlangsung cepat dan mempertahankan state aplikasi yang sedang aktif. Sedangkan, Hot Restart mengompilasi ulang kode Dart dan menjalankan ulang aplikasi, sehingga seluruh state aplikasi direset ke kondisi awal. 
+
+Kita tidak bisa hanya menggunakan hot reload ketika kita merubah kode yang terjadi terletak pada main(), mengubah state, mengubah variable global, mengubah struktur tipe widget, atau saat mengubah/menambah dependensi pada program.
