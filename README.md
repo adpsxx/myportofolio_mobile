@@ -1,17 +1,40 @@
 # myportofolio_mobile
 
-A new Flutter project.
+## Deskripsi
+Aplikasi ini adalah aplikasi mobile portofolio personal berbasis Flutter. Aplikasi ini dirancang untuk menampilkan identitas pemilik portofolio beserta akses menu menuju fitur-fitur portofolio seperti proyek, experience, tautan ke portofolio web.
 
-## Getting Started
+Aplikasi ini menerapkan konsep komposisi widget dan declarative UI dengan memisahkan entry point aplikasi (lib/main.dart) dan halaman menu utama (lib/menu.dart) berbasis StatelessWidget serta menggunakan theme Material 3. Interface utama tersusun atas komponen modular berupa InfoCard untuk menampilkan identitas pemilik portofolio, serta umpan balik interaktif menggunakan SnackBar.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Setup Instruction
+1. Unduh `Flutter SDK` sesuai sistem operasi melalui halaman resmi: [Install Flutter](https://docs.flutter.dev/get-started/install)
+2. Ekstrak arsip Flutter SDK ke direktori yang diinginkan
+3. Tambahkan direktori `flutter/bin` ke environment variable **`PATH`** agar perintah `flutter` dan `dart` dapat diakses dari terminal.
+5. Verifikasi instalasi dengan menjalankan perintah berikut di terminal:
+   ```bash
+   flutter doctor
+   ```
+   Jika terdapat lisensi Android yang belum disetujui, jalankan:
+   ```bash
+   flutter doctor --android-licenses
+   ```
+6. Clone repositori lalu masuk ke direktori proyek:
+   ```bash
+   git clone https://github.com/adpsxx/myportofolio_mobile.git
+   cd myportofolio_mobile
+   ```
+7. Unduh seluruh dependensi proyek:
+   ```bash
+   flutter pub get
+   ```
+8. Pastikan tidak ada error atau peringatan pada kode:
+   ```bash
+   flutter analyze
+   ```
+9. Cek perangkat/emulator yang tersedia:
+   ```bash
+   flutter devices
+   ```
+10. Jalankan aplikasi pada emulator, perangkat fisik, atau browser yang tersedia:
+   ```bash
+   flutter run
+   ```
