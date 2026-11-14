@@ -57,3 +57,10 @@ myportofolio_mobile/
    ```bash
    flutter run
    ```
+
+## Weekly Progress
+### Week 1
+- Setup Flutter project dan Git.
+- Membuat page main menu.
+- Menambahkan ItemCard dan styling untuk masing-masing card tersebut.
+
