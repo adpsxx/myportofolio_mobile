@@ -113,3 +113,10 @@ Theme.of(context).colorScheme.primary
 Hot Reload memasukkan perubahan kode Dart yang baru kedalam yang sedang berjalan lalu memanggil ulang metode build(). Hot Reload berlangsung cepat dan mempertahankan state aplikasi yang sedang aktif. Sedangkan, Hot Restart mengompilasi ulang kode Dart dan menjalankan ulang aplikasi, sehingga seluruh state aplikasi direset ke kondisi awal. 
 
 Kita tidak bisa hanya menggunakan hot reload ketika kita merubah kode yang terjadi terletak pada main(), mengubah state, mengubah variable global, mengubah struktur tipe widget, atau saat mengubah/menambah dependensi pada program.
+
+## AI DISCLOSURE
+### Week 1
+Pada pekan ini, penggunaaan AI yang saya lakukan hanya untuk bagian README.md dimana saya meminta AI untuk mengecek dan memastikan apakah project setup yang sudah saya masukkan benar. AI hanya saya gunakan sebagai metode untuk memvalidasi hal yang sudah saya buat.
+
+Model: ChatGPT Luna 5.6
+chat log: ./chat_log.md
