@@ -120,3 +120,8 @@ Pada pekan ini, penggunaaan AI yang saya lakukan hanya untuk bagian README.md di
 
 Model: ChatGPT Luna 5.6
 chat log: ./chat_log.md
+
+### Strategi Prompting
+Saya membuat kode saya secara mandiri terlebih dahulu, lalu meminta AI untuk mereviewnya secara bertahap.
+
+Tidak semua saran/hasil AI langsung saya terapkan. Saya tetap menyesuaikan program saya berdasarkan keinginan saya sendiri.
