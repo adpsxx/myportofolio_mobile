@@ -10,10 +10,12 @@ class ExperienceFormPage extends StatefulWidget {
   
 class _ExperienceFormPageState extends State<ExperienceFormPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _endedAtController = TextEditingController();
 
   String _experienceTitle = "";
   String _description = "";
   String _category = "full-time"; // default
+  DateTime? _endedAt;
 
   final Map<String, String> _categories = {
     'internship': 'Internship',
@@ -24,6 +26,34 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
     'freelance': 'Freelance',
     'member': 'Member',
   };
+
+  @override
+  void dispose() {
+    _endedAtController.dispose();
+    super.dispose();
+  }
+
+  String _formatDate(DateTime date) {
+    final month = date.month.toString().padLeft(2, '0');
+    final day = date.day.toString().padLeft(2, '0');
+    return '${date.year}-$month-$day';
+  }
+
+  Future<void> _pickEndedAtDate() async {
+    final now = DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _endedAt ?? now,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      setState(() {
+        _endedAt = picked;
+        _endedAtController.text = _formatDate(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +152,39 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   ),
                 ),
 
+                // Ended At
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _endedAtController,
+                    readOnly: true,
+                    onTap: _pickEndedAtDate,
+                    decoration: InputDecoration(
+                      labelText: "Tanggal Selesai Experience",
+                      hintText: "Kosongkan jika masih berlangsung",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      suffixIcon: _endedAt != null
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              tooltip: 'Hapus tanggal selesai',
+                              onPressed: () {
+                                setState(() {
+                                  _endedAt = null;
+                                  _endedAtController.clear();
+                                });
+                              },
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.calendar_today),
+                              tooltip: 'Pilih tanggal selesai',
+                              onPressed: _pickEndedAtDate,
+                            ),
+                    ),
+                  ),
+                ),
+
                 // === Tombol Simpan ===
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -150,6 +213,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                                       Text(
                                         'Kategori: ${_categories[_category] ?? _category}',
                                       ),
+                                      Text(
+                                        'Tanggal Selesai: ${_endedAt != null ? _formatDate(_endedAt!) : 'Masih berlangsung'}',
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -163,6 +229,8 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                                         _experienceTitle = "";
                                         _description = "";
                                         _category = "full-time";
+                                        _endedAt = null;
+                                        _endedAtController.clear();
                                       });
                                     },
                                   ),
