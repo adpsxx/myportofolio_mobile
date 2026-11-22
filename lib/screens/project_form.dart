@@ -20,6 +20,13 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   String _thumbnail = "";
   String _projectLink = "";
 
+  bool _isValidUrl(String value) {
+    final uri = Uri.tryParse(value);
+    return uri != null &&
+        (uri.scheme == 'http' || uri.scheme == 'https') &&
+        uri.host.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,6 +116,13 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       _thumbnail = value ?? "";
                     });
                   },
+                  validator: (String? value) {
+                    final trimmed = value?.trim() ?? "";
+                    if (trimmed.isNotEmpty && !_isValidUrl(trimmed)) {
+                      return "URL gambar proyek tidak valid!";
+                    }
+                    return null;
+                  },
                 ),
               ),
 
@@ -128,6 +142,13 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                     setState(() {
                       _projectLink = value ?? "";
                     });
+                  },
+                  validator: (String? value) {
+                    final trimmed = value?.trim() ?? "";
+                    if (trimmed.isNotEmpty && !_isValidUrl(trimmed)) {
+                      return "URL proyek tidak valid!";
+                    }
+                    return null;
                   },
                 ),
               ),
