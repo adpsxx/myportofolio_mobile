@@ -8,20 +8,27 @@ Aplikasi ini menerapkan konsep komposisi widget dan declarative UI dengan memisa
 ## Project Structure
 ```text
 myportofolio_mobile/
-├── android/                # Konfigurasi Android
-├── ios/                    # Konfigurasi iOS
-├── linux/                  # Konfigurasi build untuk Linux
-├── macos/                  # Konfigurasi build macOS
-├── web/                    # Aset dan konfigurasi untuk Web
-├── windows/                # Konfigurasi build Windows
+├── android/                            # Konfigurasi Android
+├── ios/                                # Konfigurasi iOS
+├── linux/                              # Konfigurasi build untuk Linux
+├── macos/                              # Konfigurasi build macOS
+├── web/                                # Aset dan konfigurasi untuk Web
+├── windows/                            # Konfigurasi build Windows
 ├── lib/
-│   ├── main.dart           # Entry point aplikasi dan konfigurasi MaterialApp/theme
-│   └── menu.dart           # Main page
+│   ├── main.dart                       # Entry point aplikasi dan konfigurasi MaterialApp/theme
+│   ├── screens/
+│   │   ├── menu.dart                   # Halaman menu utama portofolio
+│   │   ├── project_form.dart           # Halaman formulir tambah proyek
+│   │   └── experience_form.dart        # Halaman formulir tambah experience
+│   └── widgets/
+│       ├── left_drawer.dart            # Komponen drawer navigasi antarhalaman
+│       └── project_card.dart           # Komponen kartu aksi menu (ItemCard)
 ├── test/
-│   └── widget_test.dart    # Test
-├── analysis_options.yaml   # Aturan linting dan analisis statis
-├── pubspec.yaml            # Metadata proyek dan daftar dependensi/aset
-└── README.md               # Dokumentasi proyek, setup, dan jawaban tugas
+│   └── widget_test.dart                # Test
+├── analysis_options.yaml               # Aturan linting dan analisis statis
+├── chat_log.md                         # Log percakapan AI (AI disclosure)
+├── pubspec.yaml                        # Metadata proyek dan daftar dependensi/aset
+└── README.md                           # Dokumentasi proyek, setup, dan jawaban tugas
 ```
 
 ## Setup Instruction
