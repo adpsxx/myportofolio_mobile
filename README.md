@@ -64,6 +64,10 @@ myportofolio_mobile/
 - Membuat page main menu.
 - Menambahkan ItemCard dan styling untuk masing-masing card tersebut.
 
+### Week 2
+- Add form for both experience and project.
+- Add navigation option from main menu screen and side drawer.
+
 ## Pertanyaan Reflektif
 ### Tugas 7
 #### 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
