@@ -118,6 +118,36 @@ Hot Reload memasukkan perubahan kode Dart yang baru kedalam yang sedang berjalan
 
 Kita tidak bisa hanya menggunakan hot reload ketika kita merubah kode yang terjadi terletak pada main(), mengubah state, mengubah variable global, mengubah struktur tipe widget, atau saat mengubah/menambah dependensi pada program.
 
+### Tugas 8
+#### 1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop(). Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+`Navigator.push()` menambahkan halaman baru kebagian atas stack pada aplikasi tanpa menghapus halaman sebelumnya. 
+`Navigator.pushReplacement()` mengganti halaman yang sedang aktif dengan halaman baru, sehingga halaman lama dihapus dari memori dan user tidak bisa kembali pada halaman tersebut dengan menggunakan back.
+`Navigator.pop()` menghapus halaman yang sedang aktif lalu kembali menuju halaman sebelumnya.
+
+Untuk membuka form pada aplikasi ini, metode yang digunakan adalah menggunakan `Navigator.push()`, sehingga aplikasi menambahkan halaman formulir tersebut ke atas stack. Ketika opsi Home ditekan dari drawer, aplikasi akan mengembalikan tampilan ke halaman utama dikarenakan menggunakan `Navigator.pushReplacement()`. Aplikasi menukar halaman yang sekarang dibuka dengan halaman utama sehingga halaman utama akan ditampilkan pada user.
+
+#### 2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman?
+Scaffold menyediakan kerangka susunan utama untuk aplikasi agar selalu konsisten. AppBar berada pada bagian atas aplikasi untuk menjaga konsistensi agar selalu menampilkan judul dan menu Drawer. Drawer membuat alur navigasi antar halaman menjadi tetap konsisten dan tidak bergantung dengan isi dari halaman.
+
+Salah satu penggunaan warna tema portofolio adalah penggunaan warna Indigo yang diturunkan dari theme pada `main.dart`. Pada halaman form untuk save button (experience dan project) dan juga bagian AppBar, digunakan warna background menggunakan `Theme.of(context).colorScheme.primary`, sehingga warna akan sama dengan warna Indigo yang sudah diatur pada `main.dart` tersebut.
+
+#### 3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+Pada `project_form` dan `experience_form`, form disusun vertikal menggunakan `Column(crossAxisAlignment: CrossAxisAlignment.start)`. Form disusun vertikal agar dapat dibaca dengan mudah pada Handphone dan mudah diisi oleh user. 
+
+Widget pengatur jarak yang digunakan adalah `SizedBox` dan `Padding`. `Padding` digunakan untuk memberikan jarak antar field input agar tidak saling menempel dan menjadi rapi. `SizedBox` digunakan untuk memberikan jarak antar button cancel dan save agar tidak menempel dan menjaga kerapihannya.
+
+Widget pengulir yang digunakan adalah `SingleChildScrollView`. Widget tersebut berperan agar isi dan masing-masing dari field pada form masih dapat discroll ketika ukuran layar mengecil diakibatkan keyboard yang terbuka.
+
+#### 4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+`GlobalKey<FormState>` digunakan untuk mengakses state milik widget Form, sehingga aksi seperti validasi dan reset dapat dipicu dari tombol Save saat ditekan.
+`validator` merupakan fungsi pada tiap TextFormField yang memeriksa nilai input. Fungsi tersebut akan mengembalikan pesan error jika tidak memenuhi aturan atau null jika input yang dimasukkan sudah valid.
+`validate()` mengeksekusi semua validator di dalam Form. Jika semua valid, AlertDialog konfirmasi akan ditampilkan. Jika ada yang gagal, proses dihentikan dan pesan error ditampilkan pada field terkait tersebut.
+
+Contoh nilai yang ditolak pada validasi:
+Mengisi string kosong pada Nama Proyek / Deskripsi Proyek akan ditolak oleh value.trim().isEmpty dengan pesan "Nama proyek tidak boleh kosong!".
+
+Properti seperti keyboardType: TextInputType.url hanya mengatur tata letak tombol pada keyboard agar user dapat dengan lebih mudah mengetikknya. User tetap bisa mengetik text yang tidak valid. Karena itu, validasi logika melalui validator tetap diperlukan untuk menjamin data benar-benar sesuai aturan sebelum diproses.
+
 ## AI DISCLOSURE
 ### Week 1
 Pada pekan ini, penggunaaan AI yang saya lakukan hanya untuk bagian README.md dimana saya meminta AI untuk mengecek dan memastikan apakah project setup yang sudah saya masukkan benar. AI hanya saya gunakan sebagai metode untuk memvalidasi hal yang sudah saya buat.
