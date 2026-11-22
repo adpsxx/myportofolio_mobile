@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ProjectFormPage extends StatefulWidget {
@@ -153,67 +154,96 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 ),
               ),
 
-              // === Tombol Simpan ===
+              // Tombol Cancel & Save
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        final thumbnailValue = _thumbnail.trim().isEmpty
-                            ? _defaultThumbnail
-                            : _thumbnail.trim();
-                        final projectLinkValue = _projectLink.trim().isEmpty
-                            ? _defaultProjectLink
-                            : _projectLink.trim();
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Cancel button
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all(Colors.red),
+                        ),
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(),
+                            ),
+                            (route) => false,
+                          );
+                        },
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
 
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title:
-                                  const Text('Proyek berhasil ditambahkan!'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Nama Proyek: ${_title.trim()}'),
-                                    Text('Deskripsi: ${_description.trim()}'),
-                                    Text('URL Gambar Proyek: $thumbnailValue'),
-                                    Text('URL Proyek: $projectLinkValue'),
+                      // Save button
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all(Colors.indigo),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final thumbnailValue = _thumbnail.trim().isEmpty
+                                ? _defaultThumbnail
+                                : _thumbnail.trim();
+                            final projectLinkValue = _projectLink.trim().isEmpty
+                                ? _defaultProjectLink
+                                : _projectLink.trim();
+
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title:
+                                      const Text('Proyek berhasil ditambahkan!'),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Nama Proyek: ${_title.trim()}'),
+                                        Text(
+                                            'Deskripsi: ${_description.trim()}'),
+                                        Text(
+                                            'URL Gambar Proyek: $thumbnailValue'),
+                                        Text('URL Proyek: $projectLinkValue'),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('OK'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        _formKey.currentState!.reset();
+                                        setState(() {
+                                          _title = "";
+                                          _description = "";
+                                          _thumbnail = "";
+                                          _projectLink = "";
+                                        });
+                                      },
+                                    ),
                                   ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                    setState(() {
-                                      _title = "";
-                                      _description = "";
-                                      _thumbnail = "";
-                                      _projectLink = "";
-                                    });
-                                  },
-                                ),
-                              ],
+                                );
+                              },
                             );
-                          },
-                        );
-                      }
-                    },
-                    child: const Text(
-                      "Save",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                          }
+                        },
+                        child: const Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

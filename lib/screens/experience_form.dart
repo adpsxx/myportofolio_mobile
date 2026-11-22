@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ExperienceFormPage extends StatefulWidget {
@@ -185,65 +186,94 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   ),
                 ),
 
-                // === Tombol Simpan ===
+                // Tombol Cancel & Save
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all(Colors.indigo),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title:
-                                    const Text('Experience berhasil ditambahkan!'),
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Nama Experience: $_experienceTitle'),
-                                      Text('Deskripsi: $_description'),
-                                      Text(
-                                        'Kategori: ${_categories[_category] ?? _category}',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Cancel button
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.red),
+                          ),
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyHomePage(),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+
+                        // Save button
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.indigo),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text(
+                                        'Experience berhasil ditambahkan!'),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              'Nama Experience: $_experienceTitle'),
+                                          Text('Deskripsi: $_description'),
+                                          Text(
+                                            'Kategori: ${_categories[_category] ?? _category}',
+                                          ),
+                                          Text(
+                                            'Tanggal Selesai: ${_endedAt != null ? _formatDate(_endedAt!) : 'Masih berlangsung'}',
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        'Tanggal Selesai: ${_endedAt != null ? _formatDate(_endedAt!) : 'Masih berlangsung'}',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text('OK'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          _formKey.currentState!.reset();
+                                          setState(() {
+                                            _experienceTitle = "";
+                                            _description = "";
+                                            _category = "full-time";
+                                            _endedAt = null;
+                                            _endedAtController.clear();
+                                          });
+                                        },
                                       ),
                                     ],
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      _formKey.currentState!.reset();
-                                      setState(() {
-                                        _experienceTitle = "";
-                                        _description = "";
-                                        _category = "full-time";
-                                        _endedAt = null;
-                                        _endedAtController.clear();
-                                      });
-                                    },
-                                  ),
-                                ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                        }
-                      },
-                      child: const Text(
-                        "Save",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                            }
+                          },
+                          child: const Text(
+                            "Save",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
