@@ -162,6 +162,12 @@ Pada pekan ini, penggunaaan AI yang saya lakukan hanya untuk bagian README.md di
 Model: ChatGPT Luna 5.6
 chat log: ./chat_log.md
 
+### Week 2
+Pada pekan ini, penggunaan AI yang saya gunakan dipergunakan untuk bagian halaman project dan experience form. Saya meminta bantuan AI untuk memastikan masing-masing field yang digunakan pada form tersebut sesuai dengan yang sudah saya buat pada versi web saya. Selain itu, saya juga meminta AI untuk mengecek bagian tugas yang sudah saya kerjakan dan yang belum saya kerjakan juga.
+
+Model: Gemini 4 Neon
+chat log: ./chat_log.md
+
 ### Strategi Prompting
 Saya membuat kode saya secara mandiri terlebih dahulu, lalu meminta AI untuk mereviewnya secara bertahap.
 
