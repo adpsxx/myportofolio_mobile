@@ -65,7 +65,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
             'Add Experience Form',
           ),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -220,7 +220,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                WidgetStateProperty.all(Colors.indigo),
+                                WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
