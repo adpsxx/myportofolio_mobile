@@ -71,10 +71,10 @@ class ApiClient {
         'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: {
+      body: jsonEncode({
         'username': username,
-        'password': password
-      }
+        'password': password,
+      }),
     );
     _ensureSuccess(response);
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
