@@ -1,6 +1,11 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/models/project.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
+import 'package:myportofolio_mobile/services/api_client.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:provider/provider.dart';
 
 class ProjectFormPage extends StatefulWidget {
   const ProjectFormPage({super.key});
@@ -20,12 +25,114 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   String _description = "";
   String _thumbnail = "";
   String _projectLink = "";
+  bool _isSubmitting = false;
 
   bool _isValidUrl(String value) {
     final uri = Uri.tryParse(value);
     return uri != null &&
         (uri.scheme == 'http' || uri.scheme == 'https') &&
         uri.host.isNotEmpty;
+  }
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final ok = await ensureLoggedIn(context);
+    if (!mounted || !ok) return;
+
+    final token = context.read<AuthState>().token;
+    if (token == null) return;
+
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    final newProject = Project(
+      title: _title.trim(),
+      description: _description.trim(),
+      thumbnail: _thumbnail.trim(),
+      projectLink: _projectLink.trim(),
+    );
+
+    try {
+      final created = await context.read<ApiClient>().createProject(
+        newProject,
+        token: token,
+      );
+      if (!mounted) return;
+
+      await showDialog<void>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Proyek berhasil ditambahkan!'),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Nama Proyek: ${created.title}'),
+                  Text('Deskripsi: ${created.description}'),
+                  Text('URL Gambar Proyek: ${created.thumbnail}'),
+                  Text('URL Proyek: ${created.projectLink}'),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      if (!mounted) return;
+      _formKey.currentState!.reset();
+      setState(() {
+        _title = "";
+        _description = "";
+        _thumbnail = "";
+        _projectLink = "";
+      });
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      if (e.statusCode == 401) {
+        await context.read<AuthState>().logout();
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text('Sesi berakhir (401). Silakan login ulang.'),
+            ),
+          );
+        await ensureLoggedIn(context);
+      } else {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text('Gagal menyimpan proyek (${e.statusCode}).'),
+            ),
+          );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text('Gagal menyimpan proyek: $e')),
+        );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+        });
+      }
+    }
   }
 
   @override
@@ -189,59 +296,20 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                           backgroundColor:
                               WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            final thumbnailValue = _thumbnail.trim().isEmpty
-                                ? _defaultThumbnail
-                                : _thumbnail.trim();
-                            final projectLinkValue = _projectLink.trim().isEmpty
-                                ? _defaultProjectLink
-                                : _projectLink.trim();
-
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title:
-                                      const Text('Proyek berhasil ditambahkan!'),
-                                  content: SingleChildScrollView(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Nama Proyek: ${_title.trim()}'),
-                                        Text(
-                                            'Deskripsi: ${_description.trim()}'),
-                                        Text(
-                                            'URL Gambar Proyek: $thumbnailValue'),
-                                        Text('URL Proyek: $projectLinkValue'),
-                                      ],
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('OK'),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        _formKey.currentState!.reset();
-                                        setState(() {
-                                          _title = "";
-                                          _description = "";
-                                          _thumbnail = "";
-                                          _projectLink = "";
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                        child: const Text(
-                          "Save",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        onPressed: _isSubmitting ? null : _submit,
+                        child: _isSubmitting
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Text(
+                                "Save",
+                                style: TextStyle(color: Colors.white),
+                              ),
                       ),
                     ],
                   ),
