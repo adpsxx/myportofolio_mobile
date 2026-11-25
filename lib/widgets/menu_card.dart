@@ -24,9 +24,7 @@ class ItemCard extends StatelessWidget {
           if (item.name == "Login") {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const LoginScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
             );
             return;
           }
@@ -44,9 +42,7 @@ class ItemCard extends StatelessWidget {
             if (!context.mounted) return;
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                const SnackBar(content: Text('Berhasil logout.')),
-              );
+              ..showSnackBar(const SnackBar(content: Text('Berhasil logout.')));
             return;
           }
 
@@ -65,11 +61,9 @@ class ItemCard extends StatelessWidget {
             if (!context.mounted || !ok) return;
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ProjectFormPage(),
-              ),
+              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
             );
-          } 
+          }
           if (item.name == "Tambah Experience") {
             Navigator.push(
               context,
@@ -93,11 +87,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,

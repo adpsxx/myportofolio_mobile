@@ -11,9 +11,7 @@ class EmptyPage extends StatelessWidget {
       builder: (context, constraints) => SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: constraints.maxHeight,
-          ),
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
           child: Center(child: Text('No $type found.')),
         ),
       ),

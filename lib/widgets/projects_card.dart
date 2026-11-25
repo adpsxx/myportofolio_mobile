@@ -2,7 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/models/project.dart';
 import 'package:myportofolio_mobile/screens/project_detail_screen.dart';
 
-class ProjectsCard extends StatelessWidget{
+class ProjectsCard extends StatelessWidget {
   const ProjectsCard({super.key, required this.project});
 
   final Project project;
@@ -37,10 +37,7 @@ class ProjectsCard extends StatelessWidget{
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              project.isStarred ? Icons.star : Icons.star_border,
-              size: 18,
-            ),
+            Icon(project.isStarred ? Icons.star : Icons.star_border, size: 18),
             const SizedBox(width: 4),
             Text('${project.starCount}'),
           ],
@@ -49,8 +46,7 @@ class ProjectsCard extends StatelessWidget{
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  ProjectDetailScreen(project: project),
+              builder: (context) => ProjectDetailScreen(project: project),
             ),
           );
         },

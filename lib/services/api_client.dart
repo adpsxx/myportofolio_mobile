@@ -50,11 +50,11 @@ class ApiClient {
     final response = await _client.post(
       _uri('/api/v1/projects/'),
       headers: {
-        'Accept' : 'application/json', 
+        'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization' : 'Token $token'
+        'Authorization': 'Token $token',
       },
-      body: jsonEncode(project.toJson())
+      body: jsonEncode(project.toJson()),
     );
     _ensureSuccess(response);
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
@@ -71,10 +71,7 @@ class ApiClient {
         'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({
-        'username': username,
-        'password': password,
-      }),
+      body: jsonEncode({'username': username, 'password': password}),
     );
     _ensureSuccess(response);
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
@@ -86,9 +83,7 @@ class ApiClient {
     // and call _ensureSuccess(response).
     final response = await _client.post(
       _uri('/api/v1/auth/logout/'),
-      headers: {
-        'Authorization': 'Token $token',
-      }
+      headers: {'Authorization': 'Token $token'},
     );
     _ensureSuccess(response);
   }

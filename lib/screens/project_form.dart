@@ -13,7 +13,7 @@ class ProjectFormPage extends StatefulWidget {
   @override
   State<ProjectFormPage> createState() => _ProjectFormPageState();
 }
-  
+
 class _ProjectFormPageState extends State<ProjectFormPage> {
   static const String _defaultThumbnail =
       'https://ik.imagekit.io/hefciv25h/portfolio/placeholder.jpg';
@@ -123,9 +123,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text('Gagal menyimpan proyek: $e')),
-        );
+        ..showSnackBar(SnackBar(content: Text('Gagal menyimpan proyek: $e')));
     } finally {
       if (mounted) {
         setState(() {
@@ -139,11 +137,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Project Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Project Form')),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -293,8 +287,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       // Save button
                       ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
+                          backgroundColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                         onPressed: _isSubmitting ? null : _submit,
                         child: _isSubmitting

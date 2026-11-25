@@ -21,8 +21,16 @@ class MyHomePage extends StatelessWidget {
 
   final List<ItemHomepage> _baseItems = [
     ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, const Color.fromARGB(255, 6, 133, 10)),
-    ItemHomepage("Portofolio Web", Icons.link, const Color.fromARGB(255, 5, 10, 161)),
+    ItemHomepage(
+      "Tambah Proyek",
+      Icons.add_circle,
+      const Color.fromARGB(255, 6, 133, 10),
+    ),
+    ItemHomepage(
+      "Portofolio Web",
+      Icons.link,
+      const Color.fromARGB(255, 5, 10, 161),
+    ),
     ItemHomepage("Lihat Experience", Icons.work_outline, Colors.teal),
     ItemHomepage("Tambah Experience", Icons.add_circle, Colors.deepOrange),
   ];
@@ -43,10 +51,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -127,10 +132,7 @@ class InfoCard extends StatelessWidget {
         // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8.0),
             Text(content),
           ],
@@ -139,5 +141,3 @@ class InfoCard extends StatelessWidget {
     );
   }
 }
-
-

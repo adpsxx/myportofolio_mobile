@@ -69,7 +69,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
           if (projects.isEmpty) {
             return RefreshIndicator(
               onRefresh: _reload,
-              child: EmptyPage(type: "project")
+              child: EmptyPage(type: "project"),
             );
           }
 
