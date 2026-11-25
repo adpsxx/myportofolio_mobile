@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 class EmptyPage extends StatelessWidget {
-  EmptyPage({super.key, required this.type});
+  const EmptyPage({super.key, required this.type});
 
   final String type;
 

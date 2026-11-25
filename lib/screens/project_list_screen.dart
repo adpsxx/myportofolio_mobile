@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/models/project.dart';
-import 'package:myportofolio_mobile/screens/project_detail_screen.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 import 'package:myportofolio_mobile/widgets/empty_page.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';

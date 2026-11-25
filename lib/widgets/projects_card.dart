@@ -3,9 +3,9 @@ import 'package:myportofolio_mobile/models/project.dart';
 import 'package:myportofolio_mobile/screens/project_detail_screen.dart';
 
 class ProjectsCard extends StatelessWidget{
-  ProjectsCard({super.key, required this.project});
+  const ProjectsCard({super.key, required this.project});
 
-  Project project;
+  final Project project;
 
   @override
   Widget build(BuildContext context) {
