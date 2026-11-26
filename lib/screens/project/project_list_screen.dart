@@ -1,31 +1,31 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:myportofolio_mobile/models/experience.dart';
+import 'package:myportofolio_mobile/models/project.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 import 'package:myportofolio_mobile/widgets/empty_page.dart';
-import 'package:myportofolio_mobile/widgets/experiences_card.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/widgets/project/projects_card.dart';
 import 'package:provider/provider.dart';
 
-class ExperienceListScreen extends StatefulWidget {
-  const ExperienceListScreen({super.key});
+class ProjectListScreen extends StatefulWidget {
+  const ProjectListScreen({super.key});
 
   @override
-  State<ExperienceListScreen> createState() => _ExperienceListScreenState();
+  State<ProjectListScreen> createState() => _ProjectListScreenState();
 }
 
-class _ExperienceListScreenState extends State<ExperienceListScreen> {
-  late Future<List<Experience>> _experienceFuture;
+class _ProjectListScreenState extends State<ProjectListScreen> {
+  late Future<List<Project>> _projectsFuture;
 
   @override
   void initState() {
     super.initState();
-    _experienceFuture = context.read<ApiClient>().getExperiences();
+    _projectsFuture = context.read<ApiClient>().getProjects();
   }
 
   Future<void> _reload() async {
-    final future = context.read<ApiClient>().getExperiences();
+    final future = context.read<ApiClient>().getProjects();
     setState(() {
-      _experienceFuture = future;
+      _projectsFuture = future;
     });
     await future;
   }
@@ -33,10 +33,10 @@ class _ExperienceListScreenState extends State<ExperienceListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Achievements: Experiences')),
+      appBar: AppBar(title: const Text('Achievements: Projects')),
       drawer: const LeftDrawer(),
-      body: FutureBuilder<List<Experience>>(
-        future: _experienceFuture,
+      body: FutureBuilder<List<Project>>(
+        future: _projectsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -50,7 +50,7 @@ class _ExperienceListScreenState extends State<ExperienceListScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Failed to load experiences: ${snapshot.error}',
+                      'Failed to load projects: ${snapshot.error}',
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 12),
@@ -65,11 +65,11 @@ class _ExperienceListScreenState extends State<ExperienceListScreen> {
             );
           }
 
-          final experiences = snapshot.data ?? const <Experience>[];
-          if (experiences.isEmpty) {
+          final projects = snapshot.data ?? const <Project>[];
+          if (projects.isEmpty) {
             return RefreshIndicator(
               onRefresh: _reload,
-              child: EmptyPage(type: "experience"),
+              child: EmptyPage(type: "project"),
             );
           }
 
@@ -78,10 +78,10 @@ class _ExperienceListScreenState extends State<ExperienceListScreen> {
             child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(12),
-              itemCount: experiences.length,
+              itemCount: projects.length,
               itemBuilder: (context, index) {
-                final experience = experiences[index];
-                return ExperienceCard(experience: experience);
+                final project = projects[index];
+                return ProjectsCard(project: project);
               },
             ),
           );

@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/models/experience.dart';
-import 'package:myportofolio_mobile/screens/experience_detail_screen.dart';
+import 'package:myportofolio_mobile/screens/experience/experience_detail_screen.dart';
 
 class ExperienceCard extends StatelessWidget {
   const ExperienceCard({super.key, required this.experience});
