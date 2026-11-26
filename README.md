@@ -65,6 +65,68 @@ myportofolio_mobile/
    flutter run
    ```
 
+## How to Connect to the Backend
+
+Pastikan backend Django dari repositori web portofolio sudah terpasang dan berjalan:
+- **Repository Backend:** [https://github.com/adpsxx/myportofolios](https://github.com/adpsxx/myportofolios)
+- **Deployed Backend (PWS):** `https://andranu-dhawy-myportofolio.pws.cs.ui.ac.id`
+
+### Prasyarat Backend & Code Generation
+1. Di repositori **Django** (`myportofolios`), pastikan dependensi terpasang, migrasi sudah dijalankan (termasuk `rest_framework.authtoken`), dan kamu memiliki akun `superuser` untuk aksi tambah data (`POST`):
+   ```bash
+   pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py createsuperuser
+   ```
+2. Di repositori **Flutter** (`myportofolio_mobile`), generate berkas serialisasi JSON (`*.g.dart`) terlebih dahulu:
+   ```bash
+   flutter pub get
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+### 1. Django Lokal + Emulator Android
+Pastikan `10.0.2.2` sudah terdaftar di `ALLOWED_HOSTS` pada `portofolio/settings.py`.
+
+```bash
+# Terminal 1 (di repositori Django)
+python manage.py runserver
+
+# Terminal 2 (di repositori Flutter, menggunakan default http://10.0.2.2:8000)
+flutter run
+```
+
+### 2. Django Lokal + Chrome / Flutter Web
+```bash
+# Terminal 1 (di repositori Django)
+python manage.py runserver
+
+# Terminal 2 (di repositori Flutter)
+flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8000
+```
+
+### 3. Django Lokal + Perangkat Android Fisik (via `adb`)
+Aktifkan **USB Debugging** pada perangkat Android dan hubungkan ke PC via USB.
+
+```bash
+# Terminal 1 (di repositori Django)
+python manage.py runserver
+
+# Terminal 2 (di repositori Flutter)
+adb reverse tcp:8000 tcp:8000
+flutter run --dart-define=API_BASE_URL=http://localhost:8000
+```
+
+### 4. Django Sudah Deploy (PWS / PaaS) + Flutter
+Saat menguji atau membangun APK terhadap server Django yang sudah di-deploy:
+
+```bash
+# Menjalankan Flutter secara lokal terhadap backend yang sudah di-deploy
+flutter run --dart-define=API_BASE_URL=https://andranu-dhawy-myportofolio.pws.cs.ui.ac.id
+
+# Membangun APK release yang mengarah ke backend yang sudah di-deploy
+flutter build apk --release --dart-define=API_BASE_URL=https://andranu-dhawy-myportofolio.pws.cs.ui.ac.id
+```
+
 ## Weekly Progress
 ### Week 1
 - Setup Flutter project dan Git.
