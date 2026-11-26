@@ -86,7 +86,7 @@ class ItemCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => const ExperienceListScreen(),
-              )
+              ),
             );
           }
         },
