@@ -3,7 +3,7 @@ import 'package:myportofolio_mobile/models/project.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 import 'package:myportofolio_mobile/widgets/empty_page.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
-import 'package:myportofolio_mobile/widgets/projects_card.dart';
+import 'package:myportofolio_mobile/widgets/project/projects_card.dart';
 import 'package:provider/provider.dart';
 
 class ProjectListScreen extends StatefulWidget {
